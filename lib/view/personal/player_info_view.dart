@@ -286,39 +286,6 @@ class _PlayerInfoViewState extends State<PlayerInfoView> {
             SizedBox(
               height: 10,
             ),
-            TextFormField(
-              onTap: openDialogProvince,
-              readOnly: true,
-              controller: province,
-              decoration: InputDecoration(
-                hintText: "Chọn Tỉnh/TP in vé",
-                labelText: "Tỉnh/TP in vé",
-                counterText: "",
-                isDense: true,
-                floatingLabelStyle: TextStyle(color: ColorLot.ColorPrimary),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: ColorLot.ColorPrimary),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              onTap: openDialogTerminal,
-              readOnly: true,
-              controller: terminal,
-              decoration: InputDecoration(
-                hintText: "Chọn Điểm in vé",
-                labelText: "Điểm in vé",
-                counterText: "",
-                isDense: true,
-                floatingLabelStyle: TextStyle(color: ColorLot.ColorPrimary),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: ColorLot.ColorPrimary),
-                ),
-              ),
-            ),
             SizedBox(
               height: Dimen.marginDefault,
             ),

@@ -7,8 +7,14 @@ import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:lottery_flutter_application/controller/reward_controller.dart';
+import 'package:lottery_flutter_application/models/request/player_base_request.dart';
+import 'package:lottery_flutter_application/models/response/get_balance_response.dart';
+import 'package:lottery_flutter_application/utils/common.dart';
 import 'package:lottery_flutter_application/view/main/home_view.dart';
 import 'package:lottery_flutter_application/view/main/vietlott_home_view.dart';
+import 'package:lottery_flutter_application/view/personal/cashin_view.dart';
+import 'package:lottery_flutter_application/view/personal/reward_cate_view.dart';
 import 'package:marquee/marquee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,6 +40,7 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   int _selectedIndex = 0;
   final DictionaryController _con = DictionaryController();
+  final RewardController _rewardController = RewardController();
 
   PlayerProfile? playerProfile;
   final List<Widget> _widgetOptions = <Widget>[
@@ -50,7 +57,7 @@ class _MainViewState extends State<MainView> {
   int visit = 1;
   List<TabItem> items = [];
   String mainText = "";
-
+  int balance = 0;
   @override
   void initState() {
     super.initState();
@@ -70,6 +77,28 @@ class _MainViewState extends State<MainView> {
       });
       if (mode == Common.ANDROID_MODE_UPLOAD) {
         await getNoti();
+        await getBalance();
+      }
+    }
+  }
+
+  getBalance() async {
+    if (playerProfile != null) {
+      PlayerBaseRequest request =
+          PlayerBaseRequest(mobileNumber: playerProfile!.mobileNumber!);
+      ResponseObject res = await _rewardController.getBalance(request);
+      if (res.code == "00") {
+        if (mounted) {
+          List<GetBalanceResponse> balanceResponse =
+              List<GetBalanceResponse>.from((jsonDecode(res.data!)
+                  .map((model) => GetBalanceResponse.fromJson(model))));
+          GetBalanceResponse bl = balanceResponse
+              .where((element) => element.accountType == "P")
+              .first;
+          setState(() {
+            balance = bl.amount!;
+          });
+        }
       }
     }
   }
@@ -279,9 +308,9 @@ class _MainViewState extends State<MainView> {
                         fontSize: 12,
                       ),
                     ),
-                    const Text(
-                      "HOANG VAN MANH",
-                      style: TextStyle(
+                    Text(
+                      playerProfile != null ? playerProfile!.name! : "",
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -297,28 +326,44 @@ class _MainViewState extends State<MainView> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: const Text(
-                            "7,900đ",
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: Row(
+                            children: [
+                              Icon(Ionicons.wallet,
+                                  size: 16, color: ColorLot.ColorPrimary),
+                              const SizedBox(width: 4),
+                              Text(
+                                formatAmountD(balance),
+                                style: const TextStyle(
+                                  color: ColorLot.ColorPrimary,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 6),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.white),
-                          ),
-                          child: const Text(
-                            "Nạp tiền",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
+                        InkWell(
+                          onTap: () {
+                            Future.delayed(Duration.zero, () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CashinView()));
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 2),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.white),
+                            ),
+                            child: const Text(
+                              "Nạp tiền",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ),
@@ -334,7 +379,15 @@ class _MainViewState extends State<MainView> {
                   Row(
                     children: [
                       InkWell(
-                        onTap: () => {},
+                        onTap: () => {
+                          Future.delayed(Duration.zero, () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RewardCateView()));
+                          })
+                        },
                         child: const Icon(Ionicons.trophy, color: Colors.white),
                       ),
                       const SizedBox(

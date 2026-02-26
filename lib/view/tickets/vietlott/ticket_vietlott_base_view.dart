@@ -21,6 +21,8 @@ import 'package:lottery_flutter_application/utils/dialog_update_info_player.dart
 import 'package:lottery_flutter_application/utils/dimen.dart';
 import 'package:lottery_flutter_application/utils/head_balance_view.dart';
 import 'package:lottery_flutter_application/view/account/login_view.dart';
+import 'package:lottery_flutter_application/view/payment_view.dart';
+import 'package:lottery_flutter_application/widgets/custom_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../constants/common.dart';
@@ -65,8 +67,8 @@ class _TicketLotoState extends State<TicketVietlottBaseView> {
   int balance = 0;
   List<DrawResponse>? drawResponse;
   List<DrawResponse> draws = [];
-  int _price = 70000;
-  int _system = 7;
+  int _price = 10000;
+  int _system = 6;
   List<String>? ballss;
   List<String>? listBall;
   List<String>? listBallA;
@@ -366,7 +368,7 @@ class _TicketLotoState extends State<TicketVietlottBaseView> {
         height: Dimen.sizeBall,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: ColorLot.ColorSuccess,
+          color: ColorLot.ColorBaoChung,
         ),
         child: Text(
           "TC",
@@ -615,8 +617,19 @@ class _TicketLotoState extends State<TicketVietlottBaseView> {
         if (resFee.code == "00") {
           double fee = jsonDecode(resFee.data!)["Fee"];
           order.fee = fee.round();
-          dialogPayment(context, playerProfile!, order,
-              jsonDecode(res.data!)["Code"], _prefs);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PaymentView(
+                profile: playerProfile!,
+                order: order,
+                code: jsonDecode(res.data!)["Code"],
+                preferences: _prefs,
+                balance: balance,
+                mode: mode,
+              ),
+            ),
+          );
         } else {
           if (context.mounted) showMessage(context, res.message!, "98");
         }
@@ -1031,34 +1044,15 @@ class _TicketLotoState extends State<TicketVietlottBaseView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(
-                  child: OutlinedButton(
-                onPressed: randomNumberAllLine,
-                child: Text("Chọn nhanh",
-                    style: TextStyle(color: ColorLot.ColorRandomFast)),
-                style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.all(6),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    side:
-                        BorderSide(width: 1, color: ColorLot.ColorRandomFast)),
-              )),
+              CustomButton(
+                  label: "Chọn nhanh",
+                  backgroundColor: ColorLot.ColorBaoChung,
+                  onPressed: randomNumberAllLine),
               SizedBox(width: 8),
-              Expanded(
-                  child: OutlinedButton(
-                onPressed: next,
-                child: Text(
-                  "Đặt vé",
-                  style: TextStyle(color: ColorLot.ColorSuccess),
-                ),
-                style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.all(6),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    side: BorderSide(width: 1, color: ColorLot.ColorSuccess)),
-              )),
+              CustomButton(
+                  label: "Đặt vé",
+                  backgroundColor: ColorLot.ColorPrimary,
+                  onPressed: next),
             ],
           ),
         ],
@@ -1191,13 +1185,10 @@ class _LineView extends State<LineView> {
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(
                                             Dimen.radiusBorderButton)),
-                                    border: Border.all(
-                                        color: ColorLot.ColorPrimary,
-                                        width: 1)),
+                                    color: ColorLot.ColorPrimary),
                                 child: Text(
                                   "Chọn lại",
-                                  style:
-                                      TextStyle(color: ColorLot.ColorPrimary),
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               ),
                             ),
@@ -1215,8 +1206,7 @@ class _LineView extends State<LineView> {
                                   borderRadius: BorderRadius.all(
                                       Radius.circular(
                                           Dimen.radiusBorderButton)),
-                                  border: Border.all(
-                                      color: ColorLot.ColorSuccess, width: 1)),
+                                  color: ColorLot.ColorBaoChung),
                               child: Text(
                                 "Đồng ý",
                                 style: TextStyle(color: ColorLot.ColorSuccess),

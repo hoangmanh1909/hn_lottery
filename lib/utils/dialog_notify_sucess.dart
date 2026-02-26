@@ -7,11 +7,9 @@ import 'package:lottery_flutter_application/view/main/main_view.dart';
 
 dialogBuilderSucess(BuildContext context, String title, String message) {
   return showDialog<void>(
-    
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-
         actionsAlignment: MainAxisAlignment.center,
         backgroundColor: ColorLot.ColorBackground,
         surfaceTintColor: Colors.transparent,
@@ -50,10 +48,10 @@ dialogBuilderSucess(BuildContext context, String title, String message) {
               decoration: BoxDecoration(
                   borderRadius:
                       BorderRadius.all(Radius.circular(Dimen.radiusBorder)),
-                  border: Border.all(color: ColorLot.ColorSuccess, width: 1)),
+                  color: ColorLot.ColorXSKT),
               child: Text(
                 "Trang chủ",
-                style: TextStyle(color: ColorLot.ColorSuccess),
+                style: TextStyle(color: Colors.white),
               ),
             ),
           )

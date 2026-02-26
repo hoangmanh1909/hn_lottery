@@ -122,12 +122,11 @@ class _DialogDrawCheckbox extends State<DialogDrawCheckbox> {
             alignment: Alignment.center,
             height: 40,
             decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.all(Radius.circular(Dimen.radiusBorder)),
-                border: Border.all(color: ColorLot.ColorSuccess, width: 1)),
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                color: ColorLot.ColorPrimary),
             child: Text(
               "Đồng ý",
-              style: TextStyle(color: ColorLot.ColorSuccess),
+              style: TextStyle(color: Colors.white),
             ),
           ),
         )

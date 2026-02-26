@@ -32,6 +32,8 @@ import 'package:lottery_flutter_application/utils/dimen.dart';
 import 'package:lottery_flutter_application/utils/head_balance_view.dart';
 import 'package:lottery_flutter_application/utils/scaffold_messger.dart';
 import 'package:lottery_flutter_application/view/account/login_view.dart';
+import 'package:lottery_flutter_application/view/payment_view.dart';
+import 'package:lottery_flutter_application/widgets/custom_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/line_view.dart';
@@ -318,7 +320,7 @@ class _TicketLotoState extends State<TicketLotto535View> {
         height: Dimen.sizeBall,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: ColorLot.ColorSuccess,
+          color: ColorLot.ColorBaoChung,
         ),
         child: Text(
           "TC",
@@ -643,8 +645,19 @@ class _TicketLotoState extends State<TicketLotto535View> {
           order.fee = fee.round();
 
           if (mounted) {
-            dialogPayment(context, playerProfile!, order,
-                jsonDecode(res.data!)["Code"], _prefs);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PaymentView(
+                  profile: playerProfile!,
+                  order: order,
+                  code: jsonDecode(res.data!)["Code"],
+                  preferences: _prefs,
+                  balance: balance,
+                  mode: mode,
+                ),
+              ),
+            );
           }
         } else {
           if (mounted) showMessage(context, resFee.message!, "98");
@@ -861,7 +874,7 @@ class _TicketLotoState extends State<TicketLotto535View> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Chọn kỳ quay",
+                          "Kỳ quay số mở thưởng",
                           style: TextStyle(
                               color: Colors.black54,
                               fontSize: Dimen.fontSizeLable),
@@ -869,59 +882,39 @@ class _TicketLotoState extends State<TicketLotto535View> {
                         SizedBox(
                           height: 4,
                         ),
-                        InkWell(
-                          onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return DialogDrawCheckbox(
-                                      title: "Chọn kỳ quay",
-                                      draws: drawResponse ?? [],
-                                      drawsSeleted: draws,
-                                      callback: (value) {
-                                        setState(() {
-                                          draws = value;
-                                        });
-                                        calculator();
-                                      });
-                                });
-                          },
-                          child: Container(
-                            alignment: Alignment.centerLeft,
-                            padding: EdgeInsets.only(left: Dimen.padingDefault),
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: <BoxShadow>[boxShadow()],
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(6.0),
-                              ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: Dimen.padingDefault),
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: <BoxShadow>[boxShadow()],
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(6.0),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                    draws.isNotEmpty
-                                        ? (draws.length > 1
-                                            ? "..."
-                                            : draws[0].drawDate!)
-                                        : "",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: Dimen.fontSizeValue,
-                                      color: Colors.black,
-                                    )),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      right: Dimen.padingDefault),
-                                  child: Icon(
-                                    Ionicons.chevron_down_outline,
-                                    size: 16,
-                                    color: Colors.black54,
-                                  ),
-                                )
-                              ],
-                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                  draws.isNotEmpty
+                                      ? "${draws[0].drawCode} - ${draws[0].drawDate!}"
+                                      : "",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: Dimen.fontSizeValue,
+                                    color: Colors.black,
+                                  )),
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(right: Dimen.padingDefault),
+                                child: Icon(
+                                  Ionicons.chevron_down_outline,
+                                  size: 16,
+                                  color: Colors.black54,
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ],
@@ -1146,34 +1139,15 @@ class _TicketLotoState extends State<TicketLotto535View> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(
-                  child: OutlinedButton(
-                onPressed: randomNumberAllLine,
-                style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.all(6),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    side:
-                        BorderSide(width: 1, color: ColorLot.ColorRandomFast)),
-                child: Text("Chọn nhanh",
-                    style: TextStyle(color: ColorLot.ColorRandomFast)),
-              )),
+              CustomButton(
+                  label: "Chọn nhanh",
+                  backgroundColor: ColorLot.ColorBaoChung,
+                  onPressed: randomNumberAllLine),
               SizedBox(width: 8),
-              Expanded(
-                  child: OutlinedButton(
-                onPressed: next,
-                style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.all(6),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    side: BorderSide(width: 1, color: ColorLot.ColorSuccess)),
-                child: Text(
-                  "Đặt vé",
-                  style: TextStyle(color: ColorLot.ColorSuccess),
-                ),
-              )),
+              CustomButton(
+                  label: "Đặt vé",
+                  backgroundColor: ColorLot.ColorPrimary,
+                  onPressed: next),
             ],
           ),
         ],

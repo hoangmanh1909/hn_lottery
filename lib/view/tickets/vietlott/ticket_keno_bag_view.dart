@@ -528,7 +528,6 @@ class _TicketKenoBagViewState extends State<TicketKenoBagView>
       order.fee = 0;
       order.codePayment = codePayment;
       if (mounted) {
-        dialogPayment(context, playerProfile!, order, codePayment, _prefs);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -737,7 +736,7 @@ class _TicketKenoBagViewState extends State<TicketKenoBagView>
             CustomButton(
               label: "Chọn nhanh",
               backgroundColor: ColorLot.ColorBaoChung,
-              onPressed: () => _clearBall("A"),
+              onPressed: () => randomNumberLine(listBallA!, "A"),
             ),
             const SizedBox(width: 8),
             CustomButton(

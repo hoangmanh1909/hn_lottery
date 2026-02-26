@@ -128,7 +128,6 @@ class _HistoryOrderViewState extends State<HistoryOrderView> {
                             children: [
                               Text("#${item.code}",
                                   style: TextStyle(
-                                      fontSize: Dimen.fontSizeValue,
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold)),
                               buildStatus(item),
@@ -158,13 +157,47 @@ class _HistoryOrderViewState extends State<HistoryOrderView> {
 
 Widget buildStatus(GetOrderResponse item) {
   if (item.status == "S" || item.status == "D") {
-    return Text(getOrderStatus(item.status),
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8,
+      ), // Tạo khoảng cách giữa chữ và viền
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4), // Bo góc nhẹ cho đẹp
+        border: Border.all(
+          color: ColorLot.ColorWait, // Màu viền trùng màu chữ
+          width: 1, // Độ dày viền
+        ),
+      ),
+      child: Text(
+        getOrderStatus(item.status),
         style: TextStyle(
-            color: ColorLot.ColorWait, fontSize: Dimen.fontSizeAmount));
+          color: ColorLot.ColorWait,
+          fontSize: Dimen.fontSizeValue,
+          fontWeight: FontWeight.w500, // Thêm chút độ đậm cho dễ đọc
+        ),
+      ),
+    );
   } else if (item.status == "X") {
-    return Text(getOrderStatus(item.status),
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8,
+      ), // Tạo khoảng cách giữa chữ và viền
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4), // Bo góc nhẹ cho đẹp
+        border: Border.all(
+          color: ColorLot.ColorPrimary, // Màu viền trùng màu chữ
+          width: 1, // Độ dày viền
+        ),
+      ),
+      child: Text(
+        getOrderStatus(item.status),
         style: TextStyle(
-            color: ColorLot.ColorPrimary, fontSize: Dimen.fontSizeAmount));
+          color: ColorLot.ColorPrimary,
+          fontSize: Dimen.fontSizeValue,
+          fontWeight: FontWeight.w500, // Thêm chút độ đậm cho dễ đọc
+        ),
+      ),
+    );
   } else if (item.status == "A") {
     if (item.isResult == "Y" && item.isWin == "Y") {
       return Row(
@@ -177,9 +210,26 @@ Widget buildStatus(GetOrderResponse item) {
           SizedBox(
             width: 4,
           ),
-          Text(getOrderStatus(item.status),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8,
+            ), // Tạo khoảng cách giữa chữ và viền
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4), // Bo góc nhẹ cho đẹp
+              border: Border.all(
+                color: ColorLot.ColorSuccess, // Màu viền trùng màu chữ
+                width: 1, // Độ dày viền
+              ),
+            ),
+            child: Text(
+              getOrderStatus(item.status),
               style: TextStyle(
-                  color: ColorLot.ColorSuccess, fontSize: Dimen.fontSizeAmount))
+                color: ColorLot.ColorSuccess,
+                fontSize: Dimen.fontSizeAmount,
+                fontWeight: FontWeight.w500, // Thêm chút độ đậm cho dễ đọc
+              ),
+            ),
+          )
         ],
       );
     }
@@ -194,19 +244,70 @@ Widget buildStatus(GetOrderResponse item) {
           SizedBox(
             width: 4,
           ),
-          Text(getOrderStatus(item.status),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8,
+            ), // Tạo khoảng cách giữa chữ và viền
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4), // Bo góc nhẹ cho đẹp
+              border: Border.all(
+                color: ColorLot.ColorSuccess, // Màu viền trùng màu chữ
+                width: 1, // Độ dày viền
+              ),
+            ),
+            child: Text(
+              getOrderStatus(item.status),
               style: TextStyle(
-                  color: ColorLot.ColorSuccess, fontSize: Dimen.fontSizeAmount))
+                color: ColorLot.ColorSuccess,
+                fontSize: Dimen.fontSizeAmount,
+                fontWeight: FontWeight.w500, // Thêm chút độ đậm cho dễ đọc
+              ),
+            ),
+          )
         ],
       );
     }
-    return Text(getOrderStatus(item.status),
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8,
+      ), // Tạo khoảng cách giữa chữ và viền
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4), // Bo góc nhẹ cho đẹp
+        border: Border.all(
+          color: ColorLot.ColorSuccess, // Màu viền trùng màu chữ
+          width: 1, // Độ dày viền
+        ),
+      ),
+      child: Text(
+        getOrderStatus(item.status),
         style: TextStyle(
-            color: ColorLot.ColorSuccess, fontSize: Dimen.fontSizeAmount));
+          color: ColorLot.ColorSuccess,
+          fontSize: Dimen.fontSizeAmount,
+          fontWeight: FontWeight.w500, // Thêm chút độ đậm cho dễ đọc
+        ),
+      ),
+    );
   } else {
-    return Text(getOrderStatus(item.status),
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8,
+      ), // Tạo khoảng cách giữa chữ và viền
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4), // Bo góc nhẹ cho đẹp
+        border: Border.all(
+          color: ColorLot.ColorPrimary, // Màu viền trùng màu chữ
+          width: 1, // Độ dày viền
+        ),
+      ),
+      child: Text(
+        getOrderStatus(item.status),
         style: TextStyle(
-            color: ColorLot.ColorPrimary, fontSize: Dimen.fontSizeAmount));
+          color: ColorLot.ColorPrimary,
+          fontSize: Dimen.fontSizeAmount,
+          fontWeight: FontWeight.w500, // Thêm chút độ đậm cho dễ đọc
+        ),
+      ),
+    );
   }
 }
 

@@ -120,17 +120,17 @@ class _NotificationView extends State<NotificationView> {
               Navigator.of(context).pop(isBack);
             },
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Ionicons.checkmark_done_outline,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                updateReadAll();
-              },
-            )
-          ],
+          // actions: [
+          //   IconButton(
+          //     icon: const Icon(
+          //       Ionicons.checkmark_done_outline,
+          //       color: Colors.white,
+          //     ),
+          //     onPressed: () {
+          //       updateReadAll();
+          //     },
+          //   )
+          // ],
         ),
         body: buildBody());
   }

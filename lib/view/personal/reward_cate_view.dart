@@ -8,6 +8,7 @@ import 'package:lottery_flutter_application/controller/reward_controller.dart';
 import 'package:lottery_flutter_application/utils/common.dart';
 import 'package:lottery_flutter_application/view/personal/reward_history_view.dart';
 import 'package:lottery_flutter_application/view/personal/reward_view.dart';
+import 'package:lottery_flutter_application/widgets/icon_with_background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/request/player_base_request.dart';
@@ -159,8 +160,7 @@ class _RewardCateViewState extends State<RewardCateView> {
                           children: [
                             Row(
                               children: [
-                                Icon(Ionicons.wallet_outline,
-                                    size: 35, color: ColorLot.ColorPrimary),
+                                IconWithBackground(icon: Ionicons.wallet),
                                 Padding(
                                   padding: EdgeInsets.only(left: 4),
                                   child: Text(
@@ -207,8 +207,7 @@ class _RewardCateViewState extends State<RewardCateView> {
                           children: [
                             Row(
                               children: [
-                                Icon(Icons.account_balance_outlined,
-                                    size: 35, color: ColorLot.ColorPrimary),
+                                IconWithBackground(icon: Icons.account_balance),
                                 Padding(
                                   padding: EdgeInsets.only(left: 4),
                                   child: Text(

@@ -85,7 +85,7 @@ class _CashinViewState extends State<CashinView> {
                     child: Column(
                       children: [
                         Text(
-                          "MyLott hỗ trợ nạp số dư qua hình thức chuyển khoản ngân hàng (nạp tối thiểu 50.000đ) với nội dung như sau:",
+                          "HappyLott hỗ trợ nạp số dư qua hình thức chuyển khoản ngân hàng (nạp tối thiểu 50.000đ) với nội dung như sau:",
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: Dimen.fontSizeDefault),
                         ),
@@ -113,7 +113,7 @@ class _CashinViewState extends State<CashinView> {
                               },
                               child: Icon(
                                 Ionicons.copy_outline,
-                                color: ColorLot.ColorSuccess,
+                                color: ColorLot.ColorBaoChung,
                               ),
                             ),
                           ],
@@ -154,6 +154,15 @@ class _CashinViewState extends State<CashinView> {
                               children: [
                                 Row(
                                   children: [
+                                    textValue(
+                                        "CÔNG TY TNHH TM DICH VU HAPPYLOTT")
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 4,
+                                ),
+                                Row(
+                                  children: [
                                     textLable("Ngân hàng: "),
                                     textValue("Vietinbank")
                                   ],
@@ -161,29 +170,21 @@ class _CashinViewState extends State<CashinView> {
                                 SizedBox(
                                   height: 4,
                                 ),
-                                Row(
-                                  children: [
-                                    textLable("Chi nhánh: "),
-                                    textValue("Hà Nội")
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 4,
-                                ),
+
                                 Row(
                                   children: [
                                     textLable("Số tài khoản: "),
-                                    textValue("118600058989"),
+                                    textValue("110603712688"),
                                     SizedBox(
                                       width: 8,
                                     ),
                                     InkWell(
                                       onTap: () {
-                                        copyClipboard("118600058989", context);
+                                        copyClipboard("110603712688", context);
                                       },
                                       child: Icon(
                                         Ionicons.copy_outline,
-                                        color: ColorLot.ColorSuccess,
+                                        color: ColorLot.ColorBaoChung,
                                       ),
                                     )
                                   ],

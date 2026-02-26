@@ -421,10 +421,10 @@ class _PersonalView extends State<PersonalView> {
           ),
           InkWell(
             onTap: () {
-              Future.delayed(Duration.zero, () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RuleView()));
-              });
+              // Future.delayed(Duration.zero, () {
+              //   Navigator.push(context,
+              //       MaterialPageRoute(builder: (context) => RuleView()));
+              // });
             },
             child: Row(
               children: [
@@ -465,15 +465,15 @@ class _PersonalView extends State<PersonalView> {
           ),
           InkWell(
             onTap: () {
-              Future.delayed(Duration.zero, () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => RuleView(
-                              url: "https://vesomb.vn/Tutorial",
-                              title: "Hướng dẫn",
-                            )));
-              });
+              // Future.delayed(Duration.zero, () {
+              //   Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //           builder: (context) => RuleView(
+              //                 url: "https://vesomb.vn/Tutorial",
+              //                 title: "Hướng dẫn",
+              //               )));
+              // });
             },
             child: Row(
               children: [
