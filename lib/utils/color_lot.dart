@@ -18,7 +18,7 @@ class ColorLot {
   static const Color ColorBackgoundTab = Color.fromRGBO(243, 243, 243, 1);
   static const Color ColorRandomFast = Color.fromRGBO(89, 43, 202, 1);
   static const Color ColorWait = Color.fromRGBO(254, 149, 0, 1);
-  static const Color ColorBackgroundItem = Color.fromRGBO(250, 235, 215, 1);
+  static const Color ColorBackgroundItem = Color(0xFFD8F2FD);
   static const Color ColorBaoChung = Color.fromRGBO(23, 162, 184, 1);
   static const Color ColorXSKT = Color.fromRGBO(0, 181, 226, 1);
   static const Color ColorLoto = Color(0xFF8DDA2F);

@@ -225,7 +225,7 @@ class _HistoryItemKenoViewState extends State<HistoryItemKenoView> {
                             });
                           },
                           child: SizedBox(
-                            height: 40,
+                            height: 56,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -235,10 +235,13 @@ class _HistoryItemKenoViewState extends State<HistoryItemKenoView> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text(
-                                          "Vé số ${index + 1}:",
-                                          style: TextStyle(fontSize: 14),
-                                        ),
+                                        Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 8),
+                                            child: Text(
+                                              "Vé số ${index + 1}:",
+                                              style: TextStyle(fontSize: 14),
+                                            )),
                                         SizedBox(
                                           width: 2,
                                         ),
@@ -536,10 +539,6 @@ class _HistoryItemKenoViewState extends State<HistoryItemKenoView> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(system),
-              SizedBox(
-                width: 4,
-              ),
               Text(formatAmountD(amount),
                   style: TextStyle(
                       color: ColorLot.ColorPrimary,
