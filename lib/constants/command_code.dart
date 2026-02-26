@@ -1,0 +1,70 @@
+// ignore_for_file: non_constant_identifier_names
+
+class CommandCode {
+  static String ACC_REGISTER = "ACC_REGISTER";
+  static String ACC_GET_OTP = "ACC_GET_OTP";
+  static String ACC_EDIT_PROFILE = "ACC_EDIT_PROFILE";
+  static String ACC_LOGIN = "ACC_LOGIN";
+  static String ACC_CHANGE_PASSWORD = "ACC_CHANGE_PASSWORD";
+  static String ACC_RESET_PASSWORD = "ACC_RESET_PASSWORD";
+  static String ACC_SEARCH = "ACC_SEARCH";
+  static String ACC_ADD_REFERRAL = "ACC_ADD_REFERRAL";
+  static String ACC_LOCK = "ACC_LOCK";
+
+  static String DIC_GET_JACKPOT_HOME = "DIC_GET_JACKPOT_HOME";
+  static String TRANS_GET_BALANCE = "TRANS_GET_BALANCE";
+  static String DIC_GET_DRAW_LOTO = "DIC_GET_DRAW_LOTO";
+  static String DIC_GET_DRAW_KENO = "DIC_GET_DRAW_KENO";
+  static String DIC_GET_BANK = "DIC_GET_BANK";
+  static String DIC_GET_DRAW_POWER = "DIC_GET_DRAW_POWER";
+  static String DIC_GET_DRAW_MEGA = "DIC_GET_DRAW_MEGA";
+  static String DIC_GET_DRAW_LOTTO_535 = "DIC_GET_DRAW_LOTTO_535";
+
+  static String DIC_GET_DRAW_KENO_BY_DAY1 = "DIC_GET_DRAW_KENO_BY_DAY1";
+  static String DIC_GET_DRAW_MAX3D = "DIC_GET_DRAW_MAX3D";
+  static String DIC_GET_DRAW_MAX3D_PRO = "DIC_GET_DRAW_MAX3D_PRO";
+  static String DIC_GET_DRAW_LOTO636 = "DIC_GET_DRAW_LOTO636";
+
+  static String DIC_GET_PROVINCE = "DIC_GET_PROVINCE";
+  static String POS_SEARCH = "POS_SEARCH";
+  static String DIC_GET_PARAMS = "DIC_GET_PARAMS";
+
+  static String RESULT_MEGA = "RESULT_MEGA";
+  static String RESULT_POWER = "RESULT_POWER";
+  static String RESULT_KENO = "RESULT_KENO";
+  static String RESULT_MAX3D = "RESULT_MAX3D";
+  static String RESULT_MAX3D_PRO = "RESULT_MAX3D_PRO";
+  static String RESULT_LOTOMB = "RESULT_LOTOMB";
+  static String RESULT_LOTO636 = "RESULT_LOTO636";
+  static String RESULT_RESULT_XSKT = "RESULT_RESULT_XSKT";
+  static String RESULT_LOTTO535 = "RESULT_LOTTO535";
+
+  static String TRANS_PAYMENT = "TRANS_PAYMENT";
+  static String TRANS_GET_FEE = "TRANS_GET_FEE";
+  static String TRANS_REWARD_EXCHANGE_ADD = "TRANS_REWARD_EXCHANGE_ADD";
+  static String TRANS_REWARD_EXCHANGE_SEARCH = "TRANS_REWARD_EXCHANGE_SEARCH";
+
+  static String OD_ADD_NEW = "OD_ADD_NEW";
+  static String OD_GET_BY_CODE = "OD_GET_BY_CODE";
+  static String OD_GET_ITEM_BY_CODE = "OD_GET_ITEM_BY_CODE";
+  static String OD_SEARCH = "OD_SEARCH";
+  static String OD_SEARCH_ITEM_WIN = "OD_SEARCH_ITEM_WIN";
+  static String OD_SEARCH_FOR_WEBAPP = "OD_SEARCH_FOR_WEBAPP";
+  static String OD_LIST_ADD = "OD_LIST_ADD";
+  static String OD_LIST_GET_BY_MOBILE_NUMBER = "OD_LIST_GET_BY_MOBILE_NUMBER";
+
+  static String NOTIFICATION_SEARCH = "NOTIFICATION_SEARCH";
+  static String NOTIFICATION_UPDATE_READ = "NOTIFICATION_UPDATE_READ";
+  static String NOTIFICATION_COUNT_READ = "NOTIFICATION_COUNT_READ";
+
+  static String TT_SEARCH = "TT_SEARCH";
+  static String TT_ADD_ITEM = "TT_ADD_ITEM";
+  static String TT_GET_ITEM_BY_ID = "TT_GET_ITEM_BY_ID";
+  static String TT_ADD_ITEM_GROUP = "TT_ADD_ITEM_GROUP";
+  static String TT_PAYMENT = "TT_PAYMENT";
+  static String TT_GET_TOGETHER_GROUP = "TT_GET_TOGETHER_GROUP";
+  static String TT_GET_DETAIL = "TT_GET_DETAIL";
+
+  static String XSKT_SEARCH_TICKET = "XSKT_SEARCH_TICKET";
+  static String XSKT_CONFIG_PRIZE = "XSKT_CONFIG_PRIZE";
+}

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "61169296771",
+    "firebase_url": "https://lottery-16739-default-rtdb.firebaseio.com",
+    "project_id": "lottery-16739",
+    "storage_bucket": "lottery-16739.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61169296771:android:52deb748f534b9e9bd82b6",
+        "android_client_info": {
+          "package_name": "com.vsmb.vesomienbac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61169296771-uj1lg4p9ahajhiv7bj536o935tmnqlq6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtoJnxlH0EOiRarPa2Y7WNjA8pE374Gs8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61169296771-uj1lg4p9ahajhiv7bj536o935tmnqlq6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
