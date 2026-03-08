@@ -4,6 +4,7 @@ class LotteryResultModel {
   final String prize;
   final String date;
   final String type; // Để quyết định màu sắc
+  final String bonus;
 
   LotteryResultModel({
     required this.title,
@@ -11,5 +12,6 @@ class LotteryResultModel {
     required this.prize,
     required this.date,
     required this.type,
+    required this.bonus,
   });
 }

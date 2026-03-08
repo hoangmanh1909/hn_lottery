@@ -26,16 +26,22 @@ if (flutterVersionName == null) {
 android {
     apply plugin: 'com.google.gms.google-services'
     namespace "com.hnlott.vesoonline"
-    compileSdkVersion 35
-    ndkVersion flutter.ndkVersion
+    compileSdk = 36
+    ndkVersion = "29.0.14206865" 
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
+        }
     }
 
     sourceSets {
@@ -47,8 +53,8 @@ android {
         applicationId "com.hnlott.vesoonline"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion 35
+        minSdkVersion 24
+        targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true

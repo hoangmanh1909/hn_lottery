@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:lottery_flutter_application/constants/common.dart';
 import 'package:lottery_flutter_application/controller/dictionary_controller.dart';
 import 'package:lottery_flutter_application/models/response/params_response.dart';
@@ -9,6 +10,7 @@ import 'package:lottery_flutter_application/models/response/response_object.dart
 import 'package:lottery_flutter_application/utils/color_lot.dart';
 import 'package:lottery_flutter_application/view/account/login_view.dart';
 import 'package:lottery_flutter_application/view/main/f_result_view.dart';
+import 'package:lottery_flutter_application/view/main/main_shell_view.dart';
 import 'package:lottery_flutter_application/view/main/main_view.dart';
 import 'utils/storage_util.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -93,9 +95,9 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: initialRoute,
         routes: {
-          "/main": (context) => const FResultView(),
-          "/result": (context) => const FResultView(),
-          "/": (context) => const FResultView(),
+          "/main": (context) => const LoginView(),
+          "/result": (context) => const MainShellView(),
+          "/": (context) => const MainShellView(),
         });
   }
 

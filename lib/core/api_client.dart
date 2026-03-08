@@ -111,6 +111,18 @@ class ApiClient {
     }
   }
 
+  Future<ResponseObject> executeSomo() async {
+    try {
+      Response response = await _dio.get(urlGateway + "Gateway/GetSomo");
+
+      return ResponseObject.fromJson(response.data);
+    } on DioError {
+      ResponseObject responseObject =
+          ResponseObject(code: "98", message: "Không thể kết nối đến máy chủ");
+      return responseObject;
+    }
+  }
+
 //
 // DioException (DioException [bad response]: This exception was thrown because the response has a status code of 404 and RequestOptions.validateStatus was configured to throw for this status code.
 // The status code of 404 has the following meaning: "Client error - the request contains bad syntax or cannot be fulfilled"

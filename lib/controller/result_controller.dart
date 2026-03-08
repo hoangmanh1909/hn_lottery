@@ -14,6 +14,10 @@ class ResultController extends ControllerMVC {
   static ResultController? _this;
   final ApiClient _apiClient = ApiClient();
 
+  Future<dynamic> getSomo() async {
+    return await _apiClient.executeSomo();
+  }
+
   Future<dynamic> getResultMega645() async {
     RequestObject baseRequest = RequestObject(
         code: CommandCode.RESULT_MEGA,
@@ -82,6 +86,14 @@ class ResultController extends ControllerMVC {
     RequestObject baseRequest = RequestObject(
         code: CommandCode.RESULT_RESULT_XSKT,
         data: jsonEncode(req),
+        signature: "cfa55b55ecead97653a915b788eefb8b");
+    return await _apiClient.execute1(baseRequest);
+  }
+
+  Future<ResponseObject> getMienNam() async {
+    RequestObject baseRequest = RequestObject(
+        code: CommandCode.RESULT_LOTOMN,
+        data: "",
         signature: "cfa55b55ecead97653a915b788eefb8b");
     return await _apiClient.execute1(baseRequest);
   }

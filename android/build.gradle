@@ -1,4 +1,19 @@
 
+buildscript {
+    ext.kotlin_version = '2.1.0'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        // AGP 8.4.0+ là bản hỗ trợ tốt nhất cho Gradle 8.7 và lỗi 16 KB
+        classpath 'com.android.tools.build:gradle:8.13.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.4.4'
+    }
+}
+
 allprojects {
     repositories {
         google()

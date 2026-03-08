@@ -37,6 +37,7 @@ class CommandCode {
   static String RESULT_LOTOMB = "RESULT_LOTOMB";
   static String RESULT_LOTO636 = "RESULT_LOTO636";
   static String RESULT_RESULT_XSKT = "RESULT_RESULT_XSKT";
+  static String RESULT_LOTOMN = "RESULT_LOTOMN";
   static String RESULT_LOTTO535 = "RESULT_LOTTO535";
 
   static String TRANS_PAYMENT = "TRANS_PAYMENT";

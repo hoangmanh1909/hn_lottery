@@ -49,6 +49,25 @@ String convertIntToString1(double i) {
   }
 }
 
+String getCurrentDateManual() {
+  DateTime now = DateTime.now();
+
+  List<String> weekdays = [
+    "Thứ Hai",
+    "Thứ Ba",
+    "Thứ Tư",
+    "Thứ Năm",
+    "Thứ Sáu",
+    "Thứ Bảy",
+    "Chủ Nhật"
+  ];
+
+  String dayName = weekdays[now.weekday - 1];
+  String dateStr = "${now.day}/${now.month}/${now.year}";
+
+  return "$dayName, $dateStr";
+}
+
 String getDayOfWeekVi(String dayEn) {
   switch (dayEn) {
     case "Monday":
