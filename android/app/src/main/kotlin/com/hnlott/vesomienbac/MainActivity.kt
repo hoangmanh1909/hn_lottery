@@ -1,4 +1,4 @@
-package com.vsmb.vesomienbac
+package com.hnlott.vesoonline
 
 import io.flutter.embedding.android.FlutterActivity
 
