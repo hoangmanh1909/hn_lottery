@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottery_flutter_application/config/api.dart';
 import 'package:lottery_flutter_application/constants/common.dart';
+import 'package:lottery_flutter_application/controller/account_controller.dart';
 import 'package:lottery_flutter_application/controller/payment_controller.dart';
 import 'package:lottery_flutter_application/controller/xskt_controller.dart';
 import 'package:lottery_flutter_application/models/radio_model.dart';
 import 'package:lottery_flutter_application/models/request/get_fee_request.dart';
 import 'package:lottery_flutter_application/models/request/order_add_request.dart';
 import 'package:lottery_flutter_application/models/request/order_item_add_request.dart';
+import 'package:lottery_flutter_application/models/request/player_base_request.dart';
 import 'package:lottery_flutter_application/models/request/xskt_base_request.dart';
 import 'package:lottery_flutter_application/models/request/xskt_search_ticket_request.dart';
 import 'package:lottery_flutter_application/models/response/get_balance_response.dart';
@@ -29,6 +31,8 @@ import 'package:lottery_flutter_application/utils/dialog_update_info_player.dart
 import 'package:lottery_flutter_application/utils/scaffold_messger.dart';
 import 'package:lottery_flutter_application/utils/timer_app.dart';
 import 'package:lottery_flutter_application/view/account/login_view.dart';
+import 'package:lottery_flutter_application/view/payment_view.dart';
+import 'package:lottery_flutter_application/widgets/custom_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class XSKTBookView extends StatefulWidget {
@@ -43,6 +47,7 @@ class XSKTBookView extends StatefulWidget {
 
 class _XSKTBookState extends State<XSKTBookView> {
   final PaymentController conPay = PaymentController();
+  final AccountController _conAcc = AccountController();
 
   XSKTController con = XSKTController();
 
@@ -62,6 +67,7 @@ class _XSKTBookState extends State<XSKTBookView> {
   SelectItemListModel? _symbol;
   var isSelectedAll = false;
   int price = 10000;
+  int balance = 0;
 
   String mode = "ON";
 
@@ -89,9 +95,30 @@ class _XSKTBookState extends State<XSKTBookView> {
     if (mounted) {
       showProcess(context);
     }
+    await getBalance();
     await getAmountPrize();
     await getTicket();
     if (mounted) Navigator.pop(context);
+  }
+
+  getBalance() async {
+    if (playerProfile != null) {
+      PlayerBaseRequest request =
+          PlayerBaseRequest(mobileNumber: playerProfile!.mobileNumber!);
+      ResponseObject res = await _conAcc.getBalance(request);
+      if (res.code == "00") {
+        if (mounted) {
+          balanceResponse = List<GetBalanceResponse>.from((jsonDecode(res.data!)
+              .map((model) => GetBalanceResponse.fromJson(model))));
+          GetBalanceResponse bl = balanceResponse!
+              .where((element) => element.accountType == "P")
+              .first;
+          setState(() {
+            balance = bl.amount!;
+          });
+        }
+      }
+    }
   }
 
   getAmountPrize() async {
@@ -373,8 +400,19 @@ class _XSKTBookState extends State<XSKTBookView> {
         if (resFee.code == "00") {
           double fee = jsonDecode(resFee.data!)["Fee"];
           order.fee = fee.round();
-          dialogPayment(context, playerProfile!, order,
-              jsonDecode(res.data!)["Code"], _prefs);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PaymentView(
+                profile: playerProfile!,
+                order: order,
+                code: jsonDecode(res.data!)["Code"],
+                preferences: _prefs,
+                balance: balance,
+                mode: mode,
+              ),
+            ),
+          );
         } else {
           if (context.mounted) showMessage(context, res.message!, "98");
         }
@@ -737,27 +775,18 @@ class _XSKTBookState extends State<XSKTBookView> {
           actions: <Widget>[
             Row(
               children: [
-                Expanded(
-                    child: OutlinedButton(
-                  onPressed: () {
-                    Navigator.of(context, rootNavigator: true).pop();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      side:
-                          BorderSide(width: 1.0, color: ColorLot.ColorPrimary),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                  child: Text(
-                    "Đóng",
-                    style:
-                        TextStyle(color: ColorLot.ColorPrimary, fontSize: 16),
-                  ),
-                )),
+                CustomButton(
+                    label: "Đóng",
+                    backgroundColor: ColorLot.ColorPrimary,
+                    onPressed: () {
+                      Navigator.of(context, rootNavigator: true).pop();
+                    }),
                 SizedBox(
                   width: 8,
                 ),
-                Expanded(
-                    child: OutlinedButton(
+                CustomButton(
+                  label: "Đồng ý",
+                  backgroundColor: ColorLot.ColorBaoChung,
                   onPressed: () {
                     XSKTTickeResponse ticketModel = XSKTTickeResponse();
                     ticketModel.value = item.value!;
@@ -767,15 +796,7 @@ class _XSKTBookState extends State<XSKTBookView> {
 
                     onSelectedTicket(ticketModel);
                   },
-                  style: ElevatedButton.styleFrom(
-                      side: BorderSide(width: 1.0, color: Colors.green),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                  child: Text(
-                    "Đồng ý",
-                    style: TextStyle(color: Colors.green, fontSize: 16),
-                  ),
-                )),
+                )
               ],
             )
           ],
@@ -1096,47 +1117,29 @@ class _XSKTBookState extends State<XSKTBookView> {
           actions: <Widget>[
             Row(
               children: [
-                Expanded(
-                    child: OutlinedButton(
-                  onPressed: () {
-                    Navigator.of(context, rootNavigator: true).pop();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      side:
-                          BorderSide(width: 1.0, color: ColorLot.ColorPrimary),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                  child: Text(
-                    "Đóng",
-                    style:
-                        TextStyle(color: ColorLot.ColorPrimary, fontSize: 16),
-                  ),
-                )),
+                CustomButton(
+                    label: "Đóng",
+                    backgroundColor: ColorLot.ColorPrimary,
+                    onPressed: () {
+                      Navigator.of(context, rootNavigator: true).pop();
+                    }),
                 SizedBox(
                   width: 8,
                 ),
-                Expanded(
-                    child: OutlinedButton(
-                  onPressed: () {
-                    XSKTTickeResponse ticketModel = XSKTTickeResponse();
-                    ticketModel.symbol = _symbol!.listValue!.join(',');
-                    ticketModel.value = _symbol!.lable!;
-                    ticketModel.providerID = item.providerID!;
-                    ticketModel.total = _symbol!.listValue!.length;
-                    ticketModel.type = item.type!;
-                    ticketModel.drawlerID = item.drawlerID!;
+                CustomButton(
+                    label: "Đồng ý",
+                    backgroundColor: ColorLot.ColorBaoChung,
+                    onPressed: () {
+                      XSKTTickeResponse ticketModel = XSKTTickeResponse();
+                      ticketModel.symbol = _symbol!.listValue!.join(',');
+                      ticketModel.value = _symbol!.lable!;
+                      ticketModel.providerID = item.providerID!;
+                      ticketModel.total = _symbol!.listValue!.length;
+                      ticketModel.type = item.type!;
+                      ticketModel.drawlerID = item.drawlerID!;
 
-                    onSelectedTicket(ticketModel);
-                  },
-                  style: ElevatedButton.styleFrom(
-                      side: BorderSide(width: 1.0, color: Colors.green),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                  child: Text(
-                    "Đồng ý",
-                    style: TextStyle(color: Colors.green, fontSize: 16),
-                  ),
-                )),
+                      onSelectedTicket(ticketModel);
+                    }),
               ],
             )
           ],

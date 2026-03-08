@@ -1,37 +1,26 @@
 {
   "project_info": {
-    "project_number": "61169296771",
-    "firebase_url": "https://lottery-16739-default-rtdb.firebaseio.com",
-    "project_id": "lottery-16739",
-    "storage_bucket": "lottery-16739.appspot.com"
+    "project_number": "1095975525605",
+    "project_id": "vesoonline-5cb3a",
+    "storage_bucket": "vesoonline-5cb3a.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:61169296771:android:52deb748f534b9e9bd82b6",
+        "mobilesdk_app_id": "1:1095975525605:android:40bdf924101b5d7acb880c",
         "android_client_info": {
-          "package_name": "com.vsmb.vesomienbac"
+          "package_name": "com.hnlott.vesoonline"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "61169296771-uj1lg4p9ahajhiv7bj536o935tmnqlq6.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDtoJnxlH0EOiRarPa2Y7WNjA8pE374Gs8"
+          "current_key": "AIzaSyAr0wLZtZOqTrTGQ4ZbKA9mFza-Gl8tI8U"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "61169296771-uj1lg4p9ahajhiv7bj536o935tmnqlq6.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
